@@ -9,33 +9,33 @@
 
 一个变量可以被定义在局部或者全局作用域中，这建立了在运行时（runtime）期间变量的访问性的不同作用域范围。 任何被定义的全局变量，意味着它需要在函数体的外部被声明，并且存活于整个运行时（runtime），并且在任何作用域中都可以被访问到。 在ES6之前，局部变量只能存在于函数体中，并且函数的每次调用它们都拥有不同的作用域范围。 局部变量只能在其被调用期的作用域范围内被赋值、检索、操纵。
 需要注意，在ES6之前，JavaScript不支持块级作用域，这意味着在if语句、switch语句、for循环、while循环中无法支持块级作用域。 也就是说，ES6之前的JavaScript并不能构建类似于Java中的那样的块级作用域（变量不能在语句块外被访问到）。但是， 从ES6开始，你可以通过let关键字来定义变量，它修正了var关键字的缺点，能够让你像Java语言那样定义变量，并且支持块级作用域。看两个例子：
-ES6之前，我们使用var关键字定义变量：
-function func() {
-if (true) {
-var tmp = 123;
-}
-console.log(tmp); // 123
-}
+ES6之前，我们使用var关键字定义变量：    
+function func(){    
+if (true){     
+var tmp = 123;    
+}     
+console.log(tmp);// 123    
+}    
 之所以能够访问，是因为var关键字声明的变量有一个变量提升的过程。而在ES6场景，推荐使用let关键字定义变量：
-function func() {
-if (true) {
-let tmp = 123;
-}
-console.log(tmp); // ReferenceError: tmp is not defined
-}
+function func() {   
+if (true) {    
+let tmp = 123;    
+}    
+console.log(tmp); // ReferenceError: tmp is not defined     
+}     
 
 什么是this上下文
 上下文通常取决于函数是如何被调用的。当一个函数被作为对象中的一个方法被调用的时候，this被设置为调用该方法的对象上：
-var obj = {
-foo: function(){
-alert(this === obj); 
-}
-};
-obj.foo(); // true
+var obj = {    
+foo: function(){    
+alert(this === obj);     
+}    
+};    
+obj.foo(); // true    
 这个准则也适用于当调用函数时使用new操作符来创建对象的实例的情况下。在这种情况下，在函数的作用域内部this的值被设置为新创建的实例：
-function foo(){
-alert(this);
-}
-new foo() // foo
-foo() // window
+function foo(){    
+alert(this);     
+}    
+new foo() // foo     
+foo() // window     
 当调用一个为绑定函数时，this默认情况下是全局上下文，在浏览器中它指向window对象。需要注意的是，ES5引入了严格模式的概念， 如果启用了严格模式，此时上下文默认为undefined。
